@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 import FormTemplate from './form';
 
@@ -20,7 +19,7 @@ class registerForm extends React.Component {
                     <FormTemplate handleChange={this.props.handleChange} username={this.props.username} password={this.props.password} />
                 </div>
                 <div>
-                    <div onClick={this.props.registerNewUser}>Register</div>
+                    <button onClick={this.props.registerNewUser}>Register</button>
                 </div>                
             </div>
         );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Link, Route } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import './App.css';
@@ -66,8 +66,8 @@ class App extends Component {
           }
         })
         .then(id => {
-          console.log(id);
-          alert(`Added new user`);
+          console.log(id.data);
+          alert(`Added new user: ${id.data[0]}`);
           this.setState({
             username: '',
             password: ''
@@ -78,6 +78,29 @@ class App extends Component {
         });
     } else {
       alert('Include username and password');
+    }
+  }
+
+  loginUser = e => {
+    e.preventDefault();
+    if(this.state.username.length > 0 && this.state.password.length > 0) {
+      axios({
+        method: 'post',
+        url: 'http://localhost:3521/api/login',
+        data: {
+          "username": this.state.username,
+          "password": this.state.password,
+        }
+      })
+      .then(result => {
+        console.log(result.data);
+        alert(result.data.message);
+      })
+      .catch(err => {
+        alert('error login in, try again');
+      })
+    } else {
+      alert('must have username and password');
     }
   }
 
@@ -113,7 +136,7 @@ class App extends Component {
               <Route path={'/users'} render={props => <DisplayUsers {...props} loggedIn={this.state.loggedIn} />}></Route>
             </div>
             <div>
-              <Route path={'/login'} render={props => <LoginForm {...props} handleChange={this.handleChange} username={this.state.username} password={this.state.password}/>}></Route>
+              <Route path={'/login'} render={props => <LoginForm {...props} loginUser={this.loginUser} handleChange={this.handleChange} username={this.state.username} password={this.state.password}/>}></Route>
             </div>
             <div> 
               <Route path={'/register'} render={props => <RegisterForm {...props} registerNewUser={this.registerNewUser} handleChange={this.handleChange} username={this.state.username} password={this.state.password} />}></Route>
