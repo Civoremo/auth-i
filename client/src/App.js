@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { NavLink, Link, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import './App.css';
+import HomeScreen from './components/homeSplashScreen';
+import RegisterForm from './components/registerForm';
+import LoginForm from './components/loginForm';
 
 
 const NavBarDiv = styled.div`
@@ -39,20 +42,34 @@ class App extends Component {
         <nav>
           <NavBarDiv>
             <MenuButton>
-              Get Users
+              <Link to='/'>Home</Link>
             </MenuButton>
             <MenuButton>
-              Login
+              <Link to='/users'>Get Users</Link>
             </MenuButton>
             <MenuButton>
-              Register
+              <Link to='/login'>Login</Link>
+            </MenuButton>
+            <MenuButton>
+              Logout
+            </MenuButton>
+            <MenuButton>
+              <Link to='/register'>Register</Link>
             </MenuButton>
           </NavBarDiv>
         </nav>
 
         <div>
           <ContentContainer>
-            Select Option in Navigation
+            <div>
+              <Route exact path={'/'} render={props => <HomeScreen {...props} />}></Route>
+            </div>
+            <div>
+              <Route path={'/login'} render={props => <LoginForm {...props} />}></Route>
+            </div>
+            <div> 
+              <Route path={'/register'} render={props => <RegisterForm {...props} />}></Route>
+            </div> 
           </ContentContainer>
         </div>
       </div>
