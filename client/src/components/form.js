@@ -4,16 +4,7 @@ import React from 'react';
 class FormTemplate extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            username: '',
-            password: '',
-        }
-    }
-
-    handleChange = e => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
+        this.state = {}
     }
 
     render() {
@@ -22,18 +13,18 @@ class FormTemplate extends React.Component {
                 <form>
                     <input 
                         type="text"
-                        onChange={this.handleChange}
+                        onChange={this.props.handleChange}
                         placeholder='username'
                         name='username'
-                        value={this.state.username}
+                        value={this.props.username}
                         required={true}
                     />
                     <input 
                         type="text"
-                        onChange={this.handleChange}
+                        onChange={this.props.handleChange}
                         placeholder='password'
                         name='password'
-                        value={this.state.password}
+                        value={this.props.password}
                         required={true}
                     />
                 </form>

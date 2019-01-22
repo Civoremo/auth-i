@@ -17,7 +17,7 @@ class loginForm extends React.Component {
                     Login Form
                 </div>
                 <div>
-                    <FormTemplate />
+                    <FormTemplate handleChange={this.props.handleChange} username={this.props.username} password={this.props.password}/>
                 </div>
                 <div>
                     <button>Login</button>

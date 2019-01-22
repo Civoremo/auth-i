@@ -17,10 +17,10 @@ class registerForm extends React.Component {
                     Registration Form
                 </div>
                 <div>
-                    <FormTemplate />
+                    <FormTemplate handleChange={this.props.handleChange} username={this.props.username} password={this.props.password} />
                 </div>
                 <div>
-                    <button>Register</button>
+                    <button onClick={this.props.registerNewUser}>Register</button>
                 </div>                
             </div>
         );
