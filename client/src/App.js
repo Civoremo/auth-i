@@ -81,12 +81,14 @@ class App extends Component {
     }
   }
 
+// axios.post(url, user, {withCredentials: true})
+
   loginUser = e => {
     e.preventDefault();
     if(this.state.username.length > 0 && this.state.password.length > 0) {
       axios({
         method: 'post',
-        url: 'http://localhost:3521/api/login',
+        url: ('http://localhost:3521/api/login'),
         data: {
           "username": this.state.username,
           "password": this.state.password,
@@ -95,6 +97,10 @@ class App extends Component {
       .then(result => {
         console.log(result.data);
         alert(result.data.message);
+        this.setState({
+          username: '',
+          password: '',
+        });
       })
       .catch(err => {
         alert('error login in, try again');

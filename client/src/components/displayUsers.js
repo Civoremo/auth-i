@@ -12,7 +12,7 @@ class displayUsers extends React.Component {
     componentDidMount() {
         axios({
             method: 'get',
-            url: 'http://localhost:3521/api/users'
+            url: ('http://localhost:3521/api/users')
         })
             .then(users => {
                 // console.log(users);
@@ -26,9 +26,9 @@ class displayUsers extends React.Component {
     }
 
     render () {
-        if(this.state.users.length === 0) {
-            return <div>Loading Users</div>
-        }
+        // if(this.state.users.length === 0) {
+        //     return <div>Loading Users</div>
+        // }
         // console.log(this.state.users);
         return (
             <div>
