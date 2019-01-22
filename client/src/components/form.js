@@ -20,7 +20,7 @@ class FormTemplate extends React.Component {
                         required={true}
                     />
                     <input 
-                        type="text"
+                        type="password"
                         onChange={this.props.handleChange}
                         placeholder='password'
                         name='password'

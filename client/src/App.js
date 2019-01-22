@@ -42,7 +42,7 @@ class App extends Component {
 
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });    
   }
 
@@ -54,21 +54,31 @@ class App extends Component {
     });
   }
 
-  registerNewUser() {
-    axios({
-        method: 'post',
-        url: 'http://localhost:3521/api/register',
-        params: {
-          "username": this.state.username,
-          "password": this.state.password,
-        }
-      })
-      .then(id => {
-        alert(`Added new user, id: ${id}`);
-      })
-      .catch(err => {
-        alert('error adding new user');
-      });
+  registerNewUser = e => {
+    e.preventDefault();
+    if(this.state.username.length > 0 && this.state.password.length > 0) {
+      axios({
+          method: 'post',
+          url: 'http://localhost:3521/api/register',
+          data: {
+            "username": this.state.username,
+            "password": this.state.password,
+          }
+        })
+        .then(id => {
+          console.log(id);
+          alert(`Added new user`);
+          this.setState({
+            username: '',
+            password: ''
+          });
+        })
+        .catch(err => {
+          alert('error adding new user');
+        });
+    } else {
+      alert('Include username and password');
+    }
   }
 
   render() {
