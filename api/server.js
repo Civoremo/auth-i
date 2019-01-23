@@ -13,6 +13,11 @@ const server = express();
 server.use(helmet());
 server.use(express.json());
 server.use(morgan('short'));
+server.use(cors({
+    credentials: true,
+    origin: 'http://localhost:3000'
+}));
+
 
 
 const sessionConfig = {
@@ -22,7 +27,7 @@ const sessionConfig = {
         maxAge: 1000 * 60 * 10, // how long the session is good for in milliseconds
         secure: false, // only send the cookie over https, should be true in production
     },
-    httpOnly: true, // js can't touch this
+    httpOnly: false, // js can't touch this
     resave: false, // required by law / read more about it
     saveUninitialized: false, // required by law / read more about it
     store: new KnexSessionStore ({ // used to save session if server restarts
@@ -35,10 +40,6 @@ const sessionConfig = {
 }
 
 server.use(session(sessionConfig));
-server.use(cors({
-    credentials: true,
-    origin: 'http://localhost:3000'
-}));
 
 
 server.post('/api/register', (req, res) => {

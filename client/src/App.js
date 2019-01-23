@@ -81,8 +81,6 @@ class App extends Component {
     }
   }
 
-// axios.post(url, user, {withCredentials: true})
-
   loginUser = e => {
     e.preventDefault();
     if(this.state.username.length > 0 && this.state.password.length > 0) {
@@ -110,6 +108,20 @@ class App extends Component {
     }
   }
 
+  logoutUser = e => {
+    e.preventDefault();
+    axios({
+        method: 'get',
+        url: 'http://localhost:3521/api/logout',
+      })
+      .then(result => {
+        alert(result);
+      })
+      .catch(err => {
+        alert(err);
+      });
+  }
+
   render() {
     return (
       <div className="App">
@@ -125,7 +137,7 @@ class App extends Component {
               <Link to='/login'>Login</Link>
             </MenuButton>
             <MenuButton>
-              Logout
+              <Link to='/' onClick={this.logoutUser} >Logout</Link>
             </MenuButton>
             <MenuButton  onClick={this.clearFormText}>
               <Link to='/register'>Register</Link>
